@@ -253,7 +253,7 @@
 <!-- ═══════════════════════════════════════ HEADER ═══ -->
 <header>
   <h1>Recursive Field Framework</h1>
-  <p>wizardaax · 8 repositories · one unified theory</p>
+  <p>wizardaax · 7 repositories · one unified theory</p>
 </header>
 
 <!-- ═══════════════════════════════════════ NAV ═══ -->
@@ -266,7 +266,6 @@
   <a href="#glyph">glyph_phase_engine</a>
   <a href="#ziltrix">ziltrix-sch-core</a>
   <a href="#codex">Codex-AEON-Resonator</a>
-  <a href="#bdh">BDH</a>
 </nav>
 
 <!-- ═══════════════════════════════════════ GRAPH ═══ -->
@@ -329,13 +328,6 @@
   <!-- rfm-pro → Codex -->
   <path class="edge feeds" d="M 270 400 L 350 408" marker-end="url(#arrow-gold)"/>
   <text class="edge-label" x="310" y="395">powers</text>
-
-  <!-- ziltrix → BDH -->
-  <path class="edge feeds" d="M 790 310 L 870 368" marker-end="url(#arrow-gold)"/>
-
-  <!-- glyph → Snell-Vern (component) already shown -->
-  <!-- rfm-pro → BDH -->
-  <path class="edge" d="M 260 420 C 400 460 700 460 840 408" stroke="#2a2a4a" stroke-width="1.5" fill="none" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
 
   <!-- ── NODES ── -->
 
@@ -402,15 +394,6 @@
   </g>
   </a>
 
-  <!-- BDH — lower right -->
-  <a href="#bdh">
-  <g class="node-group">
-    <circle class="node-circle" cx="880" cy="400" r="42" fill="#0a100a" stroke="#44dd88" stroke-width="2"/>
-    <text class="node-label" x="880" y="395" fill="#66ffaa">BDH</text>
-    <text class="node-sublabel" x="880" y="411">Neural Net</text>
-  </g>
-  </a>
-
   <!-- Legend -->
   <g transform="translate(20, 460)">
     <line x1="0" y1="8" x2="30" y2="8" stroke="#cc2233" stroke-width="2" stroke-dasharray="6 3"/>
@@ -425,7 +408,7 @@
 
 <!-- ═══════════════════════════════════════ REPO CARDS ═══ -->
 <div class="section-header">
-  <h2>All 8 Repositories</h2>
+  <h2>All 7 Repositories</h2>
   <p>Click any visualization to zoom in</p>
 </div>
 
@@ -449,7 +432,6 @@
       <div class="connects-to">
         <strong>Governs:</strong>
         <span class="connects-pill">Snell-Vern</span>
-        <span class="connects-pill">BDH</span>
       </div>
     </div>
   </div>
@@ -522,7 +504,6 @@
         <span class="connects-pill">recursive-field-math</span>
         &nbsp;<strong>Feeds:</strong>
         <span class="connects-pill">Codex-AEON-Resonator</span>
-        <span class="connects-pill">BDH</span>
       </div>
     </div>
   </div>
@@ -568,8 +549,6 @@
       <div class="connects-to">
         <strong>Component of:</strong>
         <span class="connects-pill">Snell-Vern</span>
-        &nbsp;<strong>Feeds:</strong>
-        <span class="connects-pill">BDH</span>
       </div>
     </div>
   </div>
@@ -598,50 +577,6 @@
     </div>
   </div>
 
-  <!-- 8. BDH -->
-  <div class="repo-card" id="bdh">
-    <div class="repo-card-header">
-      <div class="repo-icon" style="background:#0a100a;">🐉</div>
-      <div>
-        <div class="repo-title">BDH — Baby Dragon Hatchling</div>
-        <div class="repo-subtitle">github.com/wizardaax/bdh</div>
-        <span class="repo-tag" style="background:rgba(68,221,136,0.12);border:1px solid rgba(68,221,136,0.3);color:#66ffaa;">Neural Network</span>
-      </div>
-    </div>
-    <div style="background:#080f08;padding:40px;text-align:center;">
-      <div style="font-size:4rem;margin-bottom:12px;">🐉</div>
-      <div style="color:#44dd88;font-size:0.85rem;">Requires PyTorch — architecture diagram below</div>
-      <!-- BDH architecture diagram -->
-      <svg viewBox="0 0 420 180" style="width:100%;max-width:420px;margin-top:16px;" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10"  y="70" width="80" height="40" rx="8" fill="#0a1a0a" stroke="#44dd88" stroke-width="1.5"/>
-        <text x="50"  y="94" fill="#44dd88" font-size="10" text-anchor="middle" font-family="monospace">Input</text>
-        <rect x="120" y="50" width="80" height="80" rx="8" fill="#0a1a0a" stroke="#00d4ff" stroke-width="1.5"/>
-        <text x="160" y="85" fill="#00d4ff" font-size="9"  text-anchor="middle" font-family="monospace">RoPE</text>
-        <text x="160" y="100" fill="#00d4ff" font-size="9" text-anchor="middle" font-family="monospace">Attention</text>
-        <rect x="230" y="50" width="80" height="80" rx="8" fill="#0a1a0a" stroke="#9b59ff" stroke-width="1.5"/>
-        <text x="270" y="85" fill="#9b59ff" font-size="9"  text-anchor="middle" font-family="monospace">Hebbian</text>
-        <text x="270" y="100" fill="#9b59ff" font-size="9" text-anchor="middle" font-family="monospace">Memory</text>
-        <rect x="340" y="70" width="70" height="40" rx="8" fill="#0a1a0a" stroke="#44dd88" stroke-width="1.5"/>
-        <text x="375" y="94" fill="#44dd88" font-size="10" text-anchor="middle" font-family="monospace">Output</text>
-        <line x1="90"  y1="90" x2="118" y2="90" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-        <line x1="200" y1="90" x2="228" y2="90" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-        <line x1="310" y1="90" x2="338" y2="90" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
-        <text x="210" y="168" fill="#445566" font-size="8.5" text-anchor="middle" font-family="Segoe UI,sans-serif">×6 layers · 256 dims · 4 heads · matches GPT-2 scale</text>
-      </svg>
-    </div>
-    <div class="repo-body">
-      <h4>What it is</h4>
-      <p>A biologically-inspired alternative to standard Transformer language models. "Baby Dragon Hatchling" from Pathway Research (2025) matches GPT-2 scale performance (10M–1B parameters) while being interpretable — you can understand what each part is doing.</p>
-      <p>Instead of standard attention, it uses Rotary Position Embeddings (RoPE), Hebbian working memory (neurons that fire together wire together — actual neuroscience), and sparse activations. Trained on the Shakespeare dataset and benchmarked against GPT-2 on language and translation tasks. It's the AI model layer that sits on top of the entire field-math infrastructure.</p>
-      <div class="connects-to">
-        <strong>Governed by:</strong>
-        <span class="connects-pill">SCE-88</span>
-        &nbsp;<strong>Informed by:</strong>
-        <span class="connects-pill">ziltrix-sch-core</span>
-        <span class="connects-pill">recursive-field-math-pro</span>
-      </div>
-    </div>
-  </div>
 
 </section>
 
@@ -653,7 +588,7 @@
       Every repo in this framework is exploring a single claim: <strong style="color:white;">the same mathematical structure — golden ratio spirals, Lucas sequences, phyllotaxis patterns — appears everywhere.</strong>
     </p>
     <p style="color:#d0d8f0;font-size:0.9rem;line-height:1.8;margin-bottom:12px;">
-      In plant biology. In Riemann zeta zeros. In historical power networks. In the Voynich manuscript. In chess game entropy. In how light bends through a medium. The Recursive Field Framework is the attempt to unify all of these observations under one mathematical roof — and then build an AI architecture (BDH, governed by SCE-88) that operates by those same laws.
+      In plant biology. In Riemann zeta zeros. In historical power networks. In the Voynich manuscript. In chess game entropy. In how light bends through a medium. The Recursive Field Framework is the attempt to unify all of these observations under one mathematical roof — governed by the SCE-88 safety architecture.
     </p>
     <p style="color:#6a7090;font-size:0.82rem;">
       Author: Adam Snellman · Brisbane, Australia · 2025–2026
@@ -667,7 +602,7 @@
 </div>
 
 <footer>
-  wizardaax · Recursive Field Framework · 8 repositories · generated by Claude Code
+  wizardaax · Recursive Field Framework · 7 repositories · generated by Claude Code
 </footer>
 
 <script>
