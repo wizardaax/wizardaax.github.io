@@ -42,12 +42,13 @@ jobs:
           errors = []
 
           # Match both quoted (href="path") and unquoted (href=path) attribute values
+          # Exclude absolute URLs (https?://), mailto:, fragment-only (#), and data: URIs
           internal_ref = re.compile(
               r'(?:href|src)='
               r'(?:'
-              r'["\'](?!https?://|mailto:|#)([^"\'#?\s]+)["\']'   # quoted value
+              r'["\'](?!https?://|mailto:|#|data:)([^"\'#?\s]+)["\']'   # quoted value
               r'|'
-              r'(?!https?://|mailto:|#)([^\s>\'\"#?]+)'           # unquoted value
+              r'(?!https?://|mailto:|#|data:)([^\s>\'\"#?]+)'           # unquoted value
               r')'
           )
 
