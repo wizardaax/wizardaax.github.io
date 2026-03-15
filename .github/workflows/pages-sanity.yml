@@ -1,0 +1,69 @@
+name: Pages Sanity
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install html5validator
+        run: pip install html5validator
+
+      - name: Validate HTML
+        run: html5validator --root . --also-check-css --log INFO
+        # html5validator exits non-zero on errors, which will fail the job
+
+      - name: Check for broken internal links
+        run: |
+          # Scan all href/src attributes in HTML files for internal references
+          # and verify the target files exist.
+          python3 - <<'PYEOF'
+          import re, sys, os
+          from pathlib import Path
+
+          root = Path(".")
+          html_files = list(root.glob("**/*.html"))
+          errors = []
+
+          # Match both quoted (href="path") and unquoted (href=path) attribute values
+          internal_ref = re.compile(
+              r'(?:href|src)='
+              r'(?:'
+              r'["\'](?!https?://|mailto:|#)([^"\'#?\s]+)["\']'   # quoted value
+              r'|'
+              r'(?!https?://|mailto:|#)([^\s>\'\"#?]+)'           # unquoted value
+              r')'
+          )
+
+          for html_file in html_files:
+              content = html_file.read_text(encoding="utf-8", errors="replace")
+              for match in internal_ref.finditer(content):
+                  ref = (match.group(1) or match.group(2)).lstrip("/")
+                  # Resolve relative to the HTML file's directory
+                  candidate = (html_file.parent / ref).resolve()
+                  repo_root = root.resolve()
+                  # Also check resolved from repo root
+                  candidate_root = (repo_root / ref).resolve()
+                  if not candidate.exists() and not candidate_root.exists():
+                      errors.append(f"{html_file}: broken link → {ref!r}")
+
+          if errors:
+              print("Broken internal links found:", file=sys.stderr)
+              for e in errors:
+                  print(f"  {e}", file=sys.stderr)
+              sys.exit(1)
+          else:
+              print(f"Checked {len(html_files)} HTML file(s). No broken internal links.")
+          PYEOF
