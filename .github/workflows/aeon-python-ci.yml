@@ -1,0 +1,69 @@
+name: Python CI
+
+# aeon-standards@v1 – Python CI wrapper
+# This workflow is DORMANT until Python source files are added to the repository.
+# It activates automatically when any .py file or Python project config is pushed.
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "**.py"
+      - "requirements*.txt"
+      - "pyproject.toml"
+      - "setup.py"
+      - "setup.cfg"
+      - "tox.ini"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "**.py"
+      - "requirements*.txt"
+      - "pyproject.toml"
+      - "setup.py"
+      - "setup.cfg"
+      - "tox.ini"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install ruff
+        run: pip install ruff==0.4.4
+
+      - name: Lint
+        run: ruff check .
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+      - name: Run tests
+        run: python -m pytest --tb=short -q

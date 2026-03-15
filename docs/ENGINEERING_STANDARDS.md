@@ -31,17 +31,25 @@ Every pull request targeting `main` must pass:
 | `Security / Security Scan (shared)` | `.github/workflows/aeon-security.yml` | Secret scan + shared security rules via aeon-standards@v1 |
 | `Pages Sanity / validate` | `.github/workflows/pages-sanity.yml` | HTML validation + broken internal-link check |
 
+Python CI (`aeon-python-ci.yml`) is dormant and only activates when `.py` source files are present.
+
 ---
 
 ## Branch protection (light mode)
 
-`main` branch settings:
+`main` branch settings (auto-enforced by `.github/workflows/branch-protection.yml`):
 - **Require a pull request before merging**
 - **Required approvals:** 1
 - **Required status checks:**
   - `Security / Security Scan (shared)`
   - `Pages Sanity / validate`
-- **Dismiss stale reviews on new push:** recommended
+- **Dismiss stale reviews on new push:** yes
+- **Allow force pushes:** no
+- **Allow deletions:** no
+
+> **Note:** Auto-enforcement requires a repository secret named `BRANCH_PROTECTION_TOKEN`
+> containing a fine-grained PAT (or classic PAT with `repo` scope).
+> `GITHUB_TOKEN` cannot modify branch protection rules.
 
 ---
 
@@ -58,7 +66,7 @@ Every pull request targeting `main` must pass:
 
 ## Adding Python scripts
 
-If Python simulation scripts are added to this repository in the future, enable `.github/workflows/aeon-python-ci.yml` following the aeon-standards@v1 Python CI template.
+If Python simulation scripts are added to this repository in the future, `.github/workflows/aeon-python-ci.yml` activates automatically (it is path-filtered to trigger only on `.py` and Python project config files).
 
 ---
 
@@ -77,10 +85,13 @@ CI tooling dependencies (e.g. `html5validator`) are pinned in the workflow files
 ├── index.html                     # Entry point served by GitHub Pages
 ├── sim_outputs/                   # Simulation output images (PNG)
 ├── docs/
-│   └── ENGINEERING_STANDARDS.md  # This file
+│   ├── ENGINEERING_STANDARDS.md  # This file
+│   └── HEALTH_DASHBOARD.md        # Live CI / governance status
 ├── .github/
 │   └── workflows/
 │       ├── aeon-security.yml      # aeon-standards@v1 security scan
+│       ├── aeon-python-ci.yml     # aeon-standards@v1 Python CI (dormant)
+│       ├── branch-protection.yml  # auto-enforce branch protection
 │       └── pages-sanity.yml       # HTML validation + link check
 ├── README.md
 └── SECURITY.md

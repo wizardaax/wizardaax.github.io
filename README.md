@@ -2,6 +2,10 @@
 
 Personal GitHub Pages site — **Recursive Field Framework** visualisation hub.
 
+[![aeon-standards v1](https://img.shields.io/badge/governance-aeon--standards%40v1-blue?logo=github)](docs/ENGINEERING_STANDARDS.md)
+[![Security](https://github.com/wizardaax/wizardaax.github.io/actions/workflows/aeon-security.yml/badge.svg)](https://github.com/wizardaax/wizardaax.github.io/actions/workflows/aeon-security.yml)
+[![Pages Sanity](https://github.com/wizardaax/wizardaax.github.io/actions/workflows/pages-sanity.yml/badge.svg)](https://github.com/wizardaax/wizardaax.github.io/actions/workflows/pages-sanity.yml)
+
 ## Purpose
 
 This site presents simulation outputs and research artefacts from the Recursive Field Framework project, including:
@@ -55,11 +59,14 @@ npx serve .
 ├── index.html            # Main page
 ├── sim_outputs/          # Simulation output images (PNG)
 ├── docs/
-│   └── ENGINEERING_STANDARDS.md
+│   ├── ENGINEERING_STANDARDS.md
+│   └── HEALTH_DASHBOARD.md
 ├── .github/
 │   └── workflows/
-│       ├── aeon-security.yml   # Shared security scan
-│       └── pages-sanity.yml    # HTML link / validation check
+│       ├── aeon-security.yml      # Shared security scan (aeon-standards@v1)
+│       ├── aeon-python-ci.yml     # Python CI – dormant until .py files added
+│       ├── branch-protection.yml  # Auto-enforce branch protection
+│       └── pages-sanity.yml       # HTML link / validation check
 ├── README.md
 └── SECURITY.md
 ```
