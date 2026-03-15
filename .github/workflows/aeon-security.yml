@@ -22,15 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run aeon-standards security scan
-        uses: wizardaax/aeon-standards/.github/actions/security-scan@v1
-        with:
-          profile: light
-
-      # Fallback: run a basic secret / credential scan with Gitleaks
-      # when the shared action is unavailable in forks / first-time runs.
-      - name: Secret scan (Gitleaks fallback)
-        if: always()
+      - name: Secret scan (Gitleaks)
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
