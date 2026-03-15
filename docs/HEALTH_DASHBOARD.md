@@ -30,4 +30,14 @@ Live status for `wizardaax/wizardaax.github.io`.
 | Allow force pushes | ✗ |
 | Allow deletions | ✗ |
 
+## AI agent protocol
+
+| Item | Status |
+|------|--------|
+| AEON Engineering App | active — see [`.github/copilot-instructions.md`](../.github/copilot-instructions.md) |
+| Execution cycle | PLAN → EXECUTE → VERIFY → REPORT |
+| Hardcoded tool names | ✗ (adapts to available tools) |
+| Stop conditions | ✓ (destructive / high-risk actions require approval) |
+| Artifact reporting | ✓ (files, PRs, check results required in every report) |
+
 See [`ENGINEERING_STANDARDS.md`](ENGINEERING_STANDARDS.md) for the full policy.

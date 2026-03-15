@@ -78,21 +78,37 @@ CI tooling dependencies (e.g. `html5validator`) are pinned in the workflow files
 
 ---
 
+## AI agent instructions
+
+Autonomous AI coding agents (GitHub Copilot, Copilot Workspace, or compatible
+systems) operating on this repository follow the **AEON Engineering App**
+protocol defined in [`.github/copilot-instructions.md`](../.github/copilot-instructions.md).
+
+Key protocol requirements:
+- Every task follows a **PLAN → EXECUTE → VERIFY → REPORT** cycle.
+- Reports must include exact files modified, PR links, and CI check results.
+- Destructive or high-risk actions require explicit human approval before
+  proceeding.
+- Tool names are never hardcoded; the agent adapts to available tools.
+
+---
+
 ## File organisation
 
 ```
 .
-├── index.html                     # Entry point served by GitHub Pages
-├── sim_outputs/                   # Simulation output images (PNG)
+├── index.html                          # Entry point served by GitHub Pages
+├── sim_outputs/                        # Simulation output images (PNG)
 ├── docs/
-│   ├── ENGINEERING_STANDARDS.md  # This file
-│   └── HEALTH_DASHBOARD.md        # Live CI / governance status
+│   ├── ENGINEERING_STANDARDS.md       # This file
+│   └── HEALTH_DASHBOARD.md             # Live CI / governance status
 ├── .github/
+│   ├── copilot-instructions.md         # AEON Engineering App orchestrator prompt
 │   └── workflows/
-│       ├── aeon-security.yml      # aeon-standards@v1 security scan
-│       ├── aeon-python-ci.yml     # aeon-standards@v1 Python CI (dormant)
-│       ├── branch-protection.yml  # auto-enforce branch protection
-│       └── pages-sanity.yml       # HTML validation + link check
+│       ├── aeon-security.yml           # aeon-standards@v1 security scan
+│       ├── aeon-python-ci.yml          # aeon-standards@v1 Python CI (dormant)
+│       ├── branch-protection.yml       # auto-enforce branch protection
+│       └── pages-sanity.yml            # HTML validation + link check
 ├── README.md
 └── SECURITY.md
 ```

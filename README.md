@@ -77,3 +77,8 @@ npx serve .
 
 Security and CI policies follow the **aeon-standards v1** light governance profile.
 See [`docs/ENGINEERING_STANDARDS.md`](docs/ENGINEERING_STANDARDS.md) and [`SECURITY.md`](SECURITY.md).
+
+AI coding agents operating in this repo follow the **AEON Engineering App** protocol
+defined in [`.github/copilot-instructions.md`](.github/copilot-instructions.md)
+(plan → execute → verify → report, artifact-first reporting, stop conditions for
+risky changes).
