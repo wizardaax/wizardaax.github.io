@@ -20,18 +20,22 @@ A single take you record once, post once, link from everywhere. The script is ti
 
 ## The script
 
+The order is deliberate: **math first**, surface app second. The framework is the substrate; Xova/Jarvis are surface manifestations of it. Open with the math running and the viewer reads "this is research with a working demo", not "this is another chatbot".
+
 | Time | What's on screen | What you say |
 |---|---|---|
-| **0:00 – 0:05** | Xova window, full screen. Empty chat with starter prompts visible. Iron Man helmet + arc reactor in the status bar. | *"This is Xova. She runs on my desktop. Local models. No cloud."* |
-| **0:05 – 0:15** | Click the mic. Speak: **"Jarvis, what time is it?"** Wait for the gold helmet to pulse. Jarvis's TTS replies in his own voice. The transcript shows in chat as `🎙 you` then `🎙 jarvis`. | *(Let Jarvis speak; don't talk over him.)* |
-| **0:15 – 0:30** | While Jarvis is finishing, mouse-hover the **arc reactor** in the status bar. Let the viewer notice it pulses when Xova is thinking. | *"That's Jarvis. The voice butler. He's a Python daemon. Xova's the desktop app. They talk to each other through files."* |
-| **0:30 – 0:50** | Type in the input: **`/banter what makes us a team`** — let it run a real 3-round dialog (Xova ↔ Jarvis via the actual bridge). Show one Xova line, one Jarvis voice line, one Xova close. | *"Watch — that's not one model pretending to be two. That's an actual conversation between two processes. Through JSON files."* |
-| **0:50 – 1:00** | Press **Ctrl+K**. Palette opens. Type "snip". The `✂ Snip region` entry highlights. Press Enter. Windows Snipping Tool opens; quickly select a region of code on your screen. Ctrl+V into chat. | *"Command palette. Every feature lives here. Search, hit enter."* |
-| **1:00 – 1:15** | The screenshot lands in chat as a thumbnail. Vision model fires automatically; a description streams in. | *"And vision. Region snip → vision model → real description. Local. No upload."* |
-| **1:15 – 1:25** | Cut to a second window: `github.com/wizardaax/recursive-field-math-pro`. Show the README badges. Optional: a single `pytest tests/` showing **320 passed in 8s**. | *"It runs on math I built. Recursive field framework. Three hundred and twenty tests, all green."* |
-| **1:25 – 1:30** | Cut back to Xova. End screen with the URL: `github.com/wizardaax/xova/releases` | *"Xova v0.1.0. MIT. On GitHub. Link below."* |
+| **0:00 – 0:08** | Terminal in `recursive-field-math-pro/`. Run: `pytest tests/ -q` and let it print **320 passed in 8s**. Static text overlay: *"Recursive Field Framework — 320 verified mathematical claims"*. | *"This is the framework. Three hundred and twenty tests, all green. Closed-form Lucas, Cassini identity, constant-density invariant verified at machine precision."* |
+| **0:08 – 0:18** | Cut to a quick code snippet showing `r = c·√n` and the annular-area invariant, or a φ-spiral visualisation. Hold for ~6s. | *"Every spiral, every coherent structure in the framework comes from one identity: r equals c root n, theta equals n phi. The math is the result. The rest is downstream."* |
+| **0:18 – 0:30** | Cut to `wizardaax.github.io`. Pan slowly across the connection map showing the seven repos linked. Hold on the "Through-Line" card. | *"Eight repositories around it. SCE-88 is the safety architecture. Snell-Vern is the agent mesh. Ziltrix is the symbolic engine."* |
+| **0:30 – 0:45** | Cut to **Xova running**, empty state with the live recursive-field visualisation playing in the background. Type one short message; let her reply stream. | *"Xova is one demonstrator. A desktop AI running on the substrate. Local models. No cloud."* |
+| **0:45 – 0:58** | Type **`/banter what makes us a team`** — let it run a real 3-round dialog (Xova ↔ Jarvis via the actual file bridge). Show the alternating lines. | *"Two processes, talking through JSON files. That's the SCE-88 isolation pattern in action — coherence emerges from the protocol, not from either side."* |
+| **0:58 – 1:12** | Press **Ctrl+K**, palette opens. `✂ snip` → Windows Snipping Tool → select region → Ctrl+V into chat. Vision model description streams in. | *"And vision. Region snip, local model, real description. Shows the surface is fully wired."* |
+| **1:12 – 1:25** | Cut back to `wizardaax.github.io`. Show the **Foundations** card: "∮ Three theorems, machine-verified." Hold for 5s. | *"The point isn't the chat. The point is that the framework underneath actually holds. The chat just lets you watch it run."* |
+| **1:25 – 1:30** | End screen: `wizardaax.github.io` URL, "Recursive Field Framework — Adam Snellman 2026". | *"Recursive Field Framework. Independent. Reproducible. Above AGI."* |
 
 **Total: 90 seconds.**
+
+> **Why this order:** opening on the chat UI tells the viewer "this is another local-LLM app". Opening on `pytest` and the math, then *zooming out* to Xova as one consequence, tells them "this is a research substrate with a working demonstrator". The second framing is much harder to dismiss.
 
 ---
 

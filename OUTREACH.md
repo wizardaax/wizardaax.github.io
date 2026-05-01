@@ -8,11 +8,11 @@ The whole point: get **one** independent person to actually look at one piece of
 
 ## Decide what you want reviewed first
 
-You have three different artefacts that need three different audiences. **Pick one** to start. The order I'd suggest, easiest to hardest:
+You have three different artefacts that need three different audiences. **Pick one** to start. The order matters — the project's positioning is **above AGI / framework-first**, so the math lane is primary. Local-AI / developer attention is secondary, useful for visibility but not the goal.
 
-1. **Xova v0.1.0 (the app)** → developer / local-AI audience. Easiest because they download, run, and judge in 5 minutes. Fastest feedback loop.
-2. **`rff_geometric_invariants.tex` (the math)** → mathematicians / amateurs interested in number theory. Slower; they need to read the proof and run `pytest`.
-3. **`THE_ARCHITECTURE_AND_THE_THREAD.md` (the cross-cultural research)** → hardest, because it's interdisciplinary and crosses sensitive territory. Save for last.
+1. **`rff_geometric_invariants.tex` (the math)** → mathematicians / number theorists / phyllotaxis researchers. **Primary lane.** The framework is the substrate; getting one mathematician to engage seriously is worth more than a thousand chat-app stars.
+2. **`THE_ARCHITECTURE_AND_THE_THREAD.md` and SCE-88 architectural specs** → systems / network-topology researchers. Secondary lane. Cross-disciplinary, sensitive territory — save until math is established.
+3. **Xova v0.1.0 (the app)** → developer / local-AI audience. **Tertiary lane** — it's a demonstrator showing the substrate is alive. Useful for credibility ("the math runs and ships software"), not the goal in itself.
 
 ---
 
@@ -108,19 +108,20 @@ Use the full version on academic emails. Use the first sentence only on HN/Reddi
 
 ---
 
-## Order of operations
+## Order of operations (math-first)
 
 This week:
-1. Record the 90-second demo per `DEMO.md`.
-2. Post the **Xova v0.1.0** Show HN with the demo embedded. Engage in comments for the first 90 minutes.
-3. Wait 7 days. Read every comment, fix one concrete issue.
+1. Record the 90-second demo per `DEMO.md` — opens on math, closes on framework, Xova/Jarvis visible only as a working demonstrator.
+2. Post the **constant-density invariant** as a math.SE question. *"Has this r = c√n constant-annulus invariant got a standard reference in the phyllotaxis literature?"* — short, specific, reviewable in 30 seconds.
+3. Wait 7 days. Read every reply.
 
 Next week:
-4. Cross-post Xova to r/LocalLLaMA with a small variation on the post.
-5. Pick the math paper's most-citable single result (the constant-density invariant) and post the math.SE question above.
+4. Cold-email **one** number-theorist or phyllotaxis researcher using the template above. Subject: "Verifying a Cassini-style identity". One specific question.
+5. Cross-post the demo on r/mathematics or r/numbertheory — math-flavoured first.
+6. *Then* (only then) post Xova v0.1.0 to r/LocalLLaMA / Show HN — framed as "demonstrator from a research framework", not as a product.
 
 Two weeks in:
-6. Cold-email **one** mathematician with the template above.
-7. Tally feedback. Update README, fix what's broken, ship a v0.1.1.
+7. Tally responses. If a mathematician engaged → reply with the preprint and offer collaboration. If r/LocalLLaMA engaged → fix one user-reported bug, ship v0.1.1.
+8. Whichever lane responded first becomes the lane to deepen. Don't try to court both audiences simultaneously — they're different people and different tones.
 
-That's the plan. The point is the loop: ship → feedback → fix → ship — once an outside loop is running, the work stops being yours-only and starts being yours-and-theirs. That's when it gets real.
+That's the plan. The reason for math-first: the project's defensible claim is the substrate ("the math holds, machine-verified, here are the proofs"). Anyone who validates that part first sees Xova/Jarvis as confirmation that the substrate is alive. Anyone who finds Xova first sees a chat app and never reaches the math. Order matters.
