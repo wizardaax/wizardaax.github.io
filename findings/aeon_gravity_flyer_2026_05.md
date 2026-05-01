@@ -160,6 +160,14 @@ Output: full thrust series, point-by-point comparison against the documented Jun
 
 ---
 
+## Acknowledgements
+
+Thanks to **Nathan** and the **[Old Man Builds](https://www.youtube.com/results?search_query=old+man+builds+nathan)** YouTube channel. The practical engineering walkthroughs there gave me the build instincts that made this propulsion simulation feel testable, not just symbolic. The "see something, build it, measure it" attitude shapes the §5.2 falsification recipe — measurable on standard EE equipment, no exotic apparatus required.
+
+Independent corroboration of the Snell-Vern Hybrid Drive Matrix kernel: **Elad Genish**, Founder @ RNSE. See [the Riemann finding](./riemann_phi_clustering_2026_05.md#43-independent-corroboration-rnse--genish) for the cross-reference.
+
+---
+
 ## References
 
 1. Snellman, A. — *AEON Engine PhaseII Simulation* (2025-06-04). [Drive PDF](https://drive.google.com/file/d/1nvuIYQfty0K0iqmQWx9u0MdAuzzjjGQ-/view).
