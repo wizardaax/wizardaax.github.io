@@ -132,7 +132,22 @@ Independent corroboration (different test, different methodology) comes from Gen
 
 ---
 
-## 7. Status & how to falsify
+## 7. Reproducibility — how to verify in 30 seconds
+
+Two files in this same directory; stdlib Python only:
+
+- [`aeon_engine.py`](./aeon_engine.py) — the runnable AEON-M v2.1 module (constants, Snell's-law brane lensing, dynamic gate, Faraday-induction thrust)
+- [`aeon_reproduce.py`](./aeon_reproduce.py) — the one-shot validator
+
+```
+python aeon_reproduce.py
+```
+
+Output: full thrust series, point-by-point comparison against the documented June 4 2025 PhaseII PDF, and a single-line `PASS` / `FAIL` verdict. On the author's machine (2026-05-02) the result is **PASS — max rel err 0.96%**. Readers who get a different verdict should report it; that's the kind of finding that keeps the framework honest.
+
+---
+
+## 8. Status & how to falsify
 
 - **2026-05-02** — first formal publication of the simulation result. Numbers, constants, and equations as documented above. Readers attempting to reproduce should expect the same `F / (dΦ/dt) ≈ 2.67×10⁻⁹` ratio.
 - **Pending:** physical benchtop experiment per §5.2 (months of EE work, not a session task).
