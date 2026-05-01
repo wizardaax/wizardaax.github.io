@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time-Travel Navigator — r = a√n, θ = nφ</title>
+<style>
+  body {
+    font-family: 'Courier New', monospace;
+    background: #000;
+    color: #00ff88;
+    margin: 0; padding: 20px;
+  }
+  h1, h2 { color: #00ff88; text-shadow: 0 0 8px rgba(0,255,136,0.6); }
+  h1 { margin-top: 0; font-size: 24px; }
+  .layout { display: grid; grid-template-columns: 1fr 380px; gap: 20px; max-width: 1500px; margin: 0 auto; }
+  .panel { background: #0a0a0a; border: 1px solid #00ff88; padding: 18px; border-radius: 6px; box-shadow: 0 0 18px rgba(0,255,136,0.15); }
+  canvas { background: #000; border: 1px solid #00ff88; display: block; }
+  .meta { font-size: 11px; color: #00ccaa; line-height: 1.6; }
+  .legend { display: flex; gap: 14px; margin: 8px 0; flex-wrap: wrap; font-size: 11px; }
+  .legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .ev { font-size: 11px; padding: 6px 8px; border-left: 2px solid #00ff88; margin: 4px 0; background: rgba(0,255,136,0.04); cursor: pointer; }
+  .ev:hover { background: rgba(0,255,136,0.10); }
+  .ev .ts { color: #ffff66; }
+  .ev .crest { color: #ff66ff; margin-left: 4px; }
+  .ev.milestone { border-left-color: #ffff66; }
+  .ev.cycle { border-left-color: #66ccff; }
+  .ev.voice { border-left-color: #ff8866; }
+  .formula { background: #001100; border-left: 3px solid #00ff88; padding: 10px 14px; font-size: 13px; margin: 12px 0; }
+  .stats { font-size: 11px; color: #00ccaa; margin-top: 10px; line-height: 1.7; }
+  #tip {
+    position: fixed; pointer-events: none; background: rgba(0,30,15,0.96);
+    border: 1px solid #00ff88; padding: 8px 12px; font-size: 11px;
+    color: #00ff88; max-width: 320px; border-radius: 4px; display: none; z-index: 100;
+  }
+  a { color: #66ccff; }
+  .small { font-size: 10px; color: #008866; }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="panel">
+    <h1>🌀 Time-Travel Navigator</h1>
+    <div class="formula"><strong>r = a√n,&nbsp;&nbsp;θ = n·φ</strong> &nbsp;&nbsp; <span class="small">a = 6, φ = (1+√5)/2 ≈ 1.618, golden angle ≈ 137.507°</span></div>
+    <div class="meta">Eleven months of Adam Snellman's framework work — every event placed on a golden-angle phyllotaxis spiral by chronological index. No two points overlap. Older events spiral outward at uniform area density. Hover any point for detail.</div>
+    <div class="legend">
+      <span><span class="swatch" style="background:#ffff66"></span> framework milestone</span>
+      <span><span class="swatch" style="background:#66ccff"></span> cognitive cycle (live)</span>
+      <span><span class="swatch" style="background:#ff8866"></span> voice memo</span>
+    </div>
+    <canvas id="spiral" width="900" height="900"></canvas>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="panel">
+    <h2>events</h2>
+    <div class="meta" style="margin-bottom:10px;">91 events · generated 2026-05-02T04:42:51</div>
+    <div id="event-list" style="max-height:850px;overflow-y:auto;"></div>
+  </div>
+</div>
+<div id="tip"></div>
+<script>
+const EVENTS = [{"ts": 1749054900.0, "kind": "milestone", "label": "PROJEX X SEED — ChatGPT-4o: 'Good to see you, Wizard'", "crest": "🧙", "coh": 1.0, "n": 1}, {"ts": 1750557600.0, "kind": "milestone", "label": "Mt math + LaTeX formal paper draft", "crest": "📐", "coh": 1.0, "n": 2}, {"ts": 1753927200.0, "kind": "milestone", "label": "Sound wave x — math → audio", "crest": "🎵", "coh": 1.0, "n": 3}, {"ts": 1754052000.0, "kind": "milestone", "label": "AEON Unified Scalar Codex simulation", "crest": "⚛", "coh": 1.0, "n": 4}, {"ts": 1755210780.0, "kind": "milestone", "label": "Lucus formula — Glyphfire / ALL88 named", "crest": "🔥", "coh": 1.0, "n": 5}, {"ts": 1756392060.0, "kind": "milestone", "label": "Cypher worm — Locked to Projex X1", "crest": "🪱", "coh": 1.0, "n": 6}, {"ts": 1763568240.0, "kind": "milestone", "label": "ADAM HIVE MATRIX v7-v11 (Gemini reviewed)", "crest": "🐝", "coh": 1.0, "n": 7}, {"ts": 1772298600.0, "kind": "milestone", "label": "Voynich + Vampires + Kryptos synthesis", "crest": "🗝", "coh": 1.0, "n": 8}, {"ts": 1777137300.0, "kind": "milestone", "label": "Claude data export — 108 conversations archived", "crest": "💬", "coh": 1.0, "n": 9}, {"ts": 1777162980.0, "kind": "milestone", "label": "riemann_spiral_visualization.png published", "crest": "🌀", "coh": 1.0, "n": 10}, {"ts": 1777538760.0, "kind": "milestone", "label": "Gemini visualizations rendered", "crest": "🎨", "coh": 1.0, "n": 11}, {"ts": 1777557600.0, "kind": "milestone", "label": "Phaistos Disc structural analysis (Xiltrix)", "crest": "🪨", "coh": 1.0, "n": 12}, {"ts": 1777653118.1162648, "kind": "voice", "label": "I think there might be a bit of confusion there. My voice is", "crest": "", "coh": 0.5, "n": 13}, {"ts": 1777653121.3690486, "kind": "voice", "label": "I just come up on my screen, long viewing, or damage your sc", "crest": "", "coh": 0.5, "n": 14}, {"ts": 1777653123.1309345, "kind": "voice", "label": "Tell me, if you were going to take over the world, how would", "crest": "", "coh": 0.5, "n": 15}, {"ts": 1777653125.3762374, "kind": "voice", "label": "Well, you're making up for all the other hours and hours you", "crest": "", "coh": 0.5, "n": 16}, {"ts": 1777653126.9370105, "kind": "voice", "label": "(silent or unintelligible)", "crest": "", "coh": 0.5, "n": 17}, {"ts": 1777653132.7702382, "kind": "voice", "label": "Yes, exactly like when someone sends you a blurry image and ", "crest": "", "coh": 0.5, "n": 18}, {"ts": 1777653140.5691488, "kind": "voice", "label": "Yes, exactly. There are three animation settings you can adj", "crest": "", "coh": 0.5, "n": 19}, {"ts": 1777653150.594502, "kind": "voice", "label": "It did. You made that so easy to get into the developer sett", "crest": "", "coh": 0.5, "n": 20}, {"ts": 1777653154.103587, "kind": "voice", "label": "The Keep Screen On feature is typically part of your devices", "crest": "", "coh": 0.5, "n": 21}, {"ts": 1777653165.7693815, "kind": "voice", "label": "That's quite the question. My primary goal is to help and su", "crest": "", "coh": 0.5, "n": 22}, {"ts": 1777653176.0312002, "kind": "voice", "label": "You", "crest": "", "coh": 0.5, "n": 23}, {"ts": 1777653186.093778, "kind": "voice", "label": "That notification is a built-in warning from your device to ", "crest": "", "coh": 0.5, "n": 24}, {"ts": 1777653187.8057568, "kind": "voice", "label": "anything else on your mind, or if you want to dive into anot", "crest": "", "coh": 0.5, "n": 25}, {"ts": 1777653209.4694638, "kind": "voice", "label": "My sister's going to pick me up my leg glasses all morning e", "crest": "", "coh": 0.5, "n": 26}, {"ts": 1777653212.680823, "kind": "voice", "label": "Got it. If you want to adjust the window animation scale to ", "crest": "", "coh": 0.5, "n": 27}, {"ts": 1777653216.0639307, "kind": "voice", "label": "Yeah, they definitely tucked that setting away to keep it ou", "crest": "", "coh": 0.5, "n": 28}, {"ts": 1777653219.1696095, "kind": "voice", "label": "Right and invigorating. Security camera seems to be working ", "crest": "", "coh": 0.5, "n": 29}, {"ts": 1777653226.0296445, "kind": "voice", "label": "I'm really glad I could help make it quicker and easier for ", "crest": "", "coh": 0.5, "n": 30}, {"ts": 1777653231.0696933, "kind": "voice", "label": "I'm glad I can help balance things out. If there's anything ", "crest": "", "coh": 0.5, "n": 31}, {"ts": 1777653233.0305955, "kind": "voice", "label": "Is there anything else that I should turn on? I will turn of", "crest": "", "coh": 0.5, "n": 32}, {"ts": 1777653241.7802, "kind": "voice", "label": "It looks like you've got everything under control. If you ha", "crest": "", "coh": 0.5, "n": 33}, {"ts": 1777653245.2211413, "kind": "voice", "label": "It looks like you've got the essentials covered. Most of the", "crest": "", "coh": 0.5, "n": 34}, {"ts": 1777653253.7931166, "kind": "voice", "label": "Turn down power saving off it was turned on", "crest": "", "coh": 0.5, "n": 35}, {"ts": 1777653272.5329616, "kind": "voice", "label": "The media transcoding setting in developer options helps man", "crest": "", "coh": 0.5, "n": 36}, {"ts": 1777653279.8086748, "kind": "voice", "label": "got it. If you want to keep the screen on while using a spec", "crest": "", "coh": 0.5, "n": 37}, {"ts": 1777653283.3350818, "kind": "voice", "label": "text ID.", "crest": "", "coh": 0.5, "n": 38}, {"ts": 1777653295.4709518, "kind": "voice", "label": "Whatever electronic wizardry should I know about my phone an", "crest": "", "coh": 0.5, "n": 39}, {"ts": 1777653298.9193623, "kind": "voice", "label": "I've got a friendly and clear voice, kind of like a helpful ", "crest": "", "coh": 0.5, "n": 40}, {"ts": 1777653303.825948, "kind": "voice", "label": "(silent or unintelligible)", "crest": "", "coh": 0.5, "n": 41}, {"ts": 1777653308.5644248, "kind": "voice", "label": "Yeah, it can be a double-edged sword. On one hand, staying u", "crest": "", "coh": 0.5, "n": 42}, {"ts": 1777653311.8711283, "kind": "voice", "label": "That's one of my biggest problems, I always keep up with the", "crest": "", "coh": 0.5, "n": 43}, {"ts": 1777653315.9079633, "kind": "voice", "label": "Oh, that's a different voice to listen to.", "crest": "", "coh": 0.5, "n": 44}, {"ts": 1777653316.509399, "kind": "voice", "label": "Where's my normal voice option?", "crest": "", "coh": 0.5, "n": 45}, {"ts": 1777653321.3577034, "kind": "voice", "label": "to fix all your mistakes from yesterday.", "crest": "", "coh": 0.5, "n": 46}, {"ts": 1777653322.645758, "kind": "voice", "label": "Alright, can you hear me now?", "crest": "", "coh": 0.5, "n": 47}, {"ts": 1777653323.266039, "kind": "voice", "label": "Wow, I have fucked your hand with that for hours to get that", "crest": "", "coh": 0.5, "n": 48}, {"ts": 1777653324.6646001, "kind": "voice", "label": "Do you understand how much money you have cost me?", "crest": "", "coh": 0.5, "n": 49}, {"ts": 1777653325.5000305, "kind": "voice", "label": "I'm really sorry if there's been any frustration or confusio", "crest": "", "coh": 0.5, "n": 50}, {"ts": 1777653327.1332152, "kind": "voice", "label": "Okay.", "crest": "", "coh": 0.5, "n": 51}, {"ts": 1777653338.1349316, "kind": "voice", "label": "I'll line to the code X. Tell me about the BIS bank.", "crest": "", "coh": 0.5, "n": 52}, {"ts": 1777653339.5767736, "kind": "voice", "label": "I'm glad to hear you're feeling better. It sounds like you'r", "crest": "", "coh": 0.5, "n": 53}, {"ts": 1777653340.256783, "kind": "voice", "label": "Hey there, I'm doing great. Thanks for asking, how about you", "crest": "", "coh": 0.5, "n": 54}, {"ts": 1777653340.8368118, "kind": "voice", "label": "I mean, a lot better he worked properly.", "crest": "", "coh": 0.5, "n": 55}, {"ts": 1777653347.6839938, "kind": "voice", "label": "Now, one turn, grab the blue one, don't look at it though. S", "crest": "", "coh": 0.5, "n": 56}, {"ts": 1777653348.494824, "kind": "voice", "label": "Gaddick Commander, I'll keep everything aligned and ready fo", "crest": "", "coh": 0.5, "n": 57}, {"ts": 1777653349.2151551, "kind": "voice", "label": "I was told her about the shuttle. I'm fucking tell me about ", "crest": "", "coh": 0.5, "n": 58}, {"ts": 1777653354.9241176, "kind": "voice", "label": "(silent or unintelligible)", "crest": "", "coh": 0.5, "n": 59}, {"ts": 1777653357.4809186, "kind": "voice", "label": "You know, absolutely. You know, keep going on boys. Tell her", "crest": "", "coh": 0.5, "n": 60}, {"ts": 1777653360.8693624, "kind": "voice", "label": "GiverLink is a bit of a unique concept and it's not somethin", "crest": "", "coh": 0.5, "n": 61}, {"ts": 1777653363.4135144, "kind": "voice", "label": "When this voice runs out, what voice model do you go do?", "crest": "", "coh": 0.5, "n": 62}, {"ts": 1777653366.6337328, "kind": "voice", "label": "I didn't catch anything specific from anyone else. If there'", "crest": "", "coh": 0.5, "n": 63}, {"ts": 1777653379.3274918, "kind": "voice", "label": "I try my best to keep up with as many concepts and ideas as ", "crest": "", "coh": 0.5, "n": 64}, {"ts": 1777653382.988562, "kind": "voice", "label": "Yo.", "crest": "", "coh": 0.5, "n": 65}, {"ts": 1777653383.8963034, "kind": "voice", "label": "When this voice runs out, I'll usually switch to another ava", "crest": "", "coh": 0.5, "n": 66}, {"ts": 1777653406.3419294, "kind": "voice", "label": "Oh.", "crest": "", "coh": 0.5, "n": 67}, {"ts": 1777653409.7790449, "kind": "voice", "label": "How do we hear the song?", "crest": "", "coh": 0.5, "n": 68}, {"ts": 1777653413.235405, "kind": "voice", "label": "I didn't hear anything specific from anyone else. So I'm not", "crest": "", "coh": 0.5, "n": 69}, {"ts": 1777653425.170585, "kind": "voice", "label": "What did they say?", "crest": "", "coh": 0.5, "n": 70}, {"ts": 1777653426.7376523, "kind": "voice", "label": "I just don't know what it means.", "crest": "", "coh": 0.5, "n": 71}, {"ts": 1777653427.6300435, "kind": "voice", "label": "No worries at all. Basically, it just means that if one voic", "crest": "", "coh": 0.5, "n": 72}, {"ts": 1777655882.454749, "kind": "cycle", "label": "audit lucas formula and validate field coherence", "crest": "▽◯△✱✪✦☉☽", "coh": 0.6102469159553435, "n": 73}, {"ts": 1777655893.5912406, "kind": "cycle", "label": "audit lucas formula and validate field coherence", "crest": "⚛☉✦⬡☉⚙●✪", "coh": 0.6102469159553435, "n": 74}, {"ts": 1777656011.1485393, "kind": "cycle", "label": "we are building for the next 100 years", "crest": "◆✪⚙△△✪●⚛", "coh": 0.5593037866359102, "n": 75}, {"ts": 1777656205.9576297, "kind": "cycle", "label": "audit lucas formula", "crest": "✪✱△⬡⬢⬡▽△", "coh": 0.5857957943872261, "n": 76}, {"ts": 1777656264.7030632, "kind": "cycle", "label": "validate phase coherence", "crest": "⬡◆◇☽△◇✦△", "coh": 0.6102469159553435, "n": 77}, {"ts": 1777656449.955643, "kind": "cycle", "label": "compute lucas sequence and audit field", "crest": "✧⬡✪☽☉⬡✪◆", "coh": 0.6102469159553435, "n": 78}, {"ts": 1777656600.0, "kind": "milestone", "label": "Cognitive loop wired — 7 agents alive", "crest": "🔁", "coh": 1.0, "n": 79}, {"ts": 1777656750.1578665, "kind": "cycle", "label": "compute field spiral and lucas sequence", "crest": "⚛◆⚛✦▽✪⚙◯", "coh": 0.6102469159553435, "n": 80}, {"ts": 1777657518.0914066, "kind": "cycle", "label": "run tests on the snell-vern repo", "crest": "✪✦⬡◇⚙✧▽✦", "coh": 0.6102469159553435, "n": 81}, {"ts": 1777659180.0, "kind": "milestone", "label": "Riemann · φ paper LIVE on wizardaax.github.io", "crest": "📄", "coh": 1.0, "n": 82}, {"ts": 1777659348.0071785, "kind": "cycle", "label": "validate the framework and compute lucas sequence", "crest": "☉⚙▽⚙◯▽⬡✱", "coh": 0.6102469159553435, "n": 83}, {"ts": 1777659552.0963619, "kind": "cycle", "label": "track phase and validate framework", "crest": "☽✱△☉⚛◯▽☽", "coh": 0.6102469159553435, "n": 84}, {"ts": 1777659673.332281, "kind": "cycle", "label": "observe the field and validate", "crest": "⚛⬢⬡◯●▽☉◆", "coh": 0.6102469159553435, "n": 85}, {"ts": 1777659787.1583126, "kind": "cycle", "label": "evaluate ternary logic and observe field", "crest": "◯◇▽◇◆✱◆☉", "coh": 0.6102469159553435, "n": 86}, {"ts": 1777659914.7541327, "kind": "cycle", "label": "sync repos and validate", "crest": "⚛✪●✦⚛☽✧●", "coh": 0.6102469159553435, "n": 87}, {"ts": 1777660200.0, "kind": "milestone", "label": "13/13 AGENTS ALIVE — autonomous loop closed", "crest": "✨", "coh": 1.0, "n": 88}, {"ts": 1777660297.6437979, "kind": "cycle", "label": "audit documentation and sync repos", "crest": "✦⬢☉◯⬢✧⚙✪", "coh": 0.6102469159553435, "n": 89}, {"ts": 1777660530.83418, "kind": "cycle", "label": "audit ci documentation and sync repos with coherence", "crest": "✧⚙⬡✧✧⚛⬡✧", "coh": 0.6305906408308949, "n": 90}, {"ts": 1777660749.2882495, "kind": "cycle", "label": "audit ci documentation and sync repos with full coherence", "crest": "✧✧✦☽☽●◯▽", "coh": 0.6305906408308949, "n": 91}];
+const PHI = (1 + Math.sqrt(5)) / 2;
+const A = 6;
+
+const canvas = document.getElementById('spiral');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+const cx = W/2, cy = H/2;
+const tip = document.getElementById('tip');
+
+function eventToXY(n) {
+  const r = A * Math.sqrt(n) * 4;  // visual scale factor
+  const th = n * PHI;
+  return { x: cx + r * Math.cos(th), y: cy + r * Math.sin(th), r };
+}
+
+function colorFor(kind) {
+  if (kind === 'milestone') return '#ffff66';
+  if (kind === 'cycle')     return '#66ccff';
+  if (kind === 'voice')     return '#ff8866';
+  return '#00ff88';
+}
+
+function render() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw radial guide rings
+  ctx.strokeStyle = 'rgba(0,255,136,0.12)';
+  ctx.lineWidth = 1;
+  for (let r = 60; r < W/2; r += 60) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, 2*Math.PI);
+    ctx.stroke();
+  }
+
+  // Faint spiral curve through n=0..maxN
+  const maxN = EVENTS.length > 0 ? EVENTS[EVENTS.length - 1].n : 1;
+  ctx.strokeStyle = 'rgba(0,255,136,0.18)';
+  ctx.lineWidth = 0.7;
+  ctx.beginPath();
+  for (let n = 1; n <= maxN; n += 0.5) {
+    const p = eventToXY(n);
+    if (n === 1) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+  }
+  ctx.stroke();
+
+  // Plot events
+  for (const e of EVENTS) {
+    const p = eventToXY(e.n);
+    e._x = p.x; e._y = p.y;
+    ctx.fillStyle = colorFor(e.kind);
+    ctx.shadowColor = colorFor(e.kind);
+    ctx.shadowBlur = e.kind === 'milestone' ? 12 : 6;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, e.kind === 'milestone' ? 6 : 3, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+}
+
+render();
+
+// Hover detection
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (W / rect.width);
+  const my = (e.clientY - rect.top) * (H / rect.height);
+  let hit = null;
+  let bestDist = Infinity;
+  for (const ev of EVENTS) {
+    const dx = mx - ev._x, dy = my - ev._y;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if (d < (ev.kind === 'milestone' ? 12 : 8) && d < bestDist) {
+      hit = ev; bestDist = d;
+    }
+  }
+  if (hit) {
+    const date = new Date(hit.ts * 1000).toISOString().replace('T', ' ').slice(0, 19);
+    tip.style.display = 'block';
+    tip.style.left = (e.clientX + 14) + 'px';
+    tip.style.top = (e.clientY + 14) + 'px';
+    tip.innerHTML = `<strong>${hit.kind} #${hit.n}</strong><br>${date}<br>${hit.label}` + (hit.crest ? `<br><span style="color:#ff66ff">${hit.crest}</span>` : '');
+  } else {
+    tip.style.display = 'none';
+  }
+});
+canvas.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+
+// Event list panel
+const list = document.getElementById('event-list');
+for (const ev of [...EVENTS].reverse()) {
+  const div = document.createElement('div');
+  div.className = 'ev ' + ev.kind;
+  const date = new Date(ev.ts * 1000).toISOString().replace('T', ' ').slice(0, 16);
+  div.innerHTML = `<span class="ts">${date}</span> &middot; <span>${ev.label}</span>` + (ev.crest ? ` <span class="crest">${ev.crest}</span>` : '');
+  list.appendChild(div);
+}
+
+// Stats footer
+const stats = document.getElementById('stats');
+const counts = { milestone: 0, cycle: 0, voice: 0 };
+for (const ev of EVENTS) counts[ev.kind] = (counts[ev.kind] || 0) + 1;
+stats.innerHTML = `Total events plotted: <strong>${EVENTS.length}</strong> · milestones: ${counts.milestone} · cycles: ${counts.cycle} · voice memos: ${counts.voice} · spiral parameter a = ${A}, φ = ${PHI.toFixed(15)}`;
+</script>
+</body>
+</html>
