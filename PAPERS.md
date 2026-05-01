@@ -1,8 +1,12 @@
 # Papers — wizardaax / Recursive Field Framework
 
-A unified index of research notes, derivations, and architectural drafts across the Recursive Field Framework stack. **90 PDFs** authored 2025-08 → 2025-11, plus LaTeX preprints in `recursive-field-math-pro/paper/`.
+A unified index of research notes, derivations, and architectural drafts across the Recursive Field Framework stack. **90 PDFs** authored 2025-08 → 2025-11, plus LaTeX preprints in `recursive-field-math-pro/paper/`, plus dated findings in [`findings/`](./findings/).
 
 > **New here?** Start with the [Reading order](#reading-order) below, not the alphabetical list.
+
+## Latest finding
+
+- **[Riemann zeros · φ — circular clustering, specific to ζ](./findings/riemann_phi_clustering_2026_05.md)** (2026-05-02). Pre-specified test that `(t · φ) mod 2π` clusters for the first 100 Riemann zero imaginary parts; **R = 0.2228, p = 0.0068**; specific to ζ (primes & arithmetic null at p > 0.5); independently corroborated by Genish (RNSE) at index n=150. Stdlib-only reproducible code: [`findings/riemann_spiral_test_v4.py`](./findings/riemann_spiral_test_v4.py).
 
 ---
 
