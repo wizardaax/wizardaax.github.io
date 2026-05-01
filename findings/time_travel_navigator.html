@@ -54,7 +54,7 @@
   </div>
   <div class="panel">
     <h2>events</h2>
-    <div class="meta" style="margin-bottom:10px;">97 events · generated 2026-05-02T04:47:39</div>
+    <div class="meta" style="margin-bottom:10px;">97 events · generated 2026-05-02T04:59:30</div>
     <div id="event-list" style="max-height:850px;overflow-y:auto;"></div>
   </div>
 </div>
@@ -83,9 +83,51 @@ function colorFor(kind) {
   return '#00ff88';
 }
 
+// Black swan silhouette — drawn as a faint watermark behind the spiral.
+// SVG-style path commands traced into Canvas; pure vector, no image deps.
+function drawBlackSwan() {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(2.6, 2.6);  // scale up so it spans the panel
+  ctx.fillStyle = 'rgba(0, 30, 18, 0.55)';   // dark watermark
+  ctx.strokeStyle = 'rgba(0, 255, 136, 0.18)';
+  ctx.lineWidth = 0.4;
+  ctx.beginPath();
+  // Body — Bezier curves for the swan's curved back, breast, belly
+  ctx.moveTo(-90, 30);
+  ctx.bezierCurveTo(-90, -10, -40, -50, 20, -45);   // back arc
+  ctx.bezierCurveTo(70, -42, 90, -20, 95, 20);      // tail upturn
+  ctx.bezierCurveTo(80, 38, 40, 45, -10, 45);       // belly
+  ctx.bezierCurveTo(-60, 45, -88, 40, -90, 30);     // close at left
+  // Neck — long S-curve
+  ctx.moveTo(-30, -30);
+  ctx.bezierCurveTo(-50, -70, -40, -110, -10, -125);   // neck up
+  ctx.bezierCurveTo(15, -135, 30, -125, 22, -110);     // head curve
+  ctx.bezierCurveTo(15, -100, 0, -95, -5, -100);       // beak base
+  ctx.bezierCurveTo(-12, -100, -22, -95, -25, -85);    // back of neck down
+  ctx.bezierCurveTo(-32, -60, -40, -45, -30, -30);     // join body
+  // Beak — small pointed triangle
+  ctx.moveTo(22, -110);
+  ctx.lineTo(38, -108);
+  ctx.lineTo(28, -103);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  // Eye — single faint dot
+  ctx.fillStyle = 'rgba(0, 255, 136, 0.6)';
+  ctx.beginPath();
+  ctx.arc(15, -118, 1.2, 0, 2*Math.PI);
+  ctx.fill();
+  ctx.restore();
+}
+
 function render() {
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
+
+  // Black swan silhouette behind the spiral — the unexpected event
+  // that the framework has to be able to absorb.
+  drawBlackSwan();
 
   // Draw radial guide rings
   ctx.strokeStyle = 'rgba(0,255,136,0.12)';
