@@ -4,8 +4,9 @@ A unified index of research notes, derivations, and architectural drafts across 
 
 > **New here?** Start with the [Reading order](#reading-order) below, not the alphabetical list.
 
-## Latest finding
+## Latest findings
 
+- **[Time-Travel Navigator](./findings/time_travel_navigator.html)** (2026-05-02). Eleven months of framework work plotted on the `r = a√n, θ = nφ` golden-angle spiral. 91 real events: framework milestones (Projex X seed → 13/13 agents alive), cognitive-cycle logs with crest stamps, voice-memo timestamps. Self-contained HTML, no CDN. Hover any point for label + timestamp + crest.
 - **[Riemann zeros · φ — circular clustering, specific to ζ](./findings/riemann_phi_clustering_2026_05.md)** (2026-05-02). Pre-specified test that `(t · φ) mod 2π` clusters for the first 100 Riemann zero imaginary parts; **R = 0.2228, p = 0.0068**; specific to ζ (primes & arithmetic null at p > 0.5); independently corroborated by Genish (RNSE) at index n=150. Stdlib-only reproducible code: [`findings/riemann_spiral_test_v4.py`](./findings/riemann_spiral_test_v4.py).
 
 ---
