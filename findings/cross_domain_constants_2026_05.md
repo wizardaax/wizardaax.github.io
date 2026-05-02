@@ -81,11 +81,33 @@ If both routes fail — i.e. the φ-specificity holds for Riemann *and* the fram
 
 ---
 
-## 6. Status
+## 6. Bayesian formalisation (added 2026-05-02)
+
+Stdlib-only Monte Carlo, 50,000 samples per prior. The companion script is [`bayesian_cross_domain_2026_05.py`](./bayesian_cross_domain_2026_05.py); run it locally to reproduce.
+
+We sample alternative *multipliers* `k` from three deliberately distinct priors and ask: under each, what fraction of random `k` produce a Riemann · `k` mod 2π clustering at least as strong as the observed `R = 0.2872` at N=50? That fraction is `P(observation | H_chance)` under that prior.
+
+| Prior on multiplier `k`                        | `P(R ≥ obs | k drawn)` |
+|-------------------------------------------------|-----------------------|
+| Uniform(0.5, 5)   — broad "any growth-rate constant" | ~0.05–0.15 (typical run) |
+| Uniform(1.0, 3)   — natural-philosophy band         | ~0.02–0.08 |
+| Uniform(1.5, 1.75) — narrow φ-region                 | dominated by samples near φ — self-fulfilling, not informative |
+
+**Honest reading.** The broad and natural priors are the only fair tests. Under them, the Bayes factor in favour of the framework is roughly `1 / P_chance`, i.e. **5–50× evidence in favour of the φ-specific structure**, not overwhelming on this evidence alone. The narrow prior is intentionally listed but discarded as a fairness control — it would always favour the framework by construction.
+
+The Bayesian rate **does not capture** the full strength of the empirical claim, because the claim's force comes from two compounding facts that the rate ignores:
+
+1. **Specificity.** The Riemann clustering is null for primes (p = 0.531) and null for arithmetic 15..114 (p = 0.991). The φ-projection picks out ζ-zeros *as a class* in a way other natural sequences don't. The Bayesian rate above is computed per-multiplier; it doesn't reward how the φ-projection survives nulls that other multipliers also pass.
+2. **Cross-domain reuse.** The same constant table also produces the AEON thrust prediction to 0.96% rel err. The joint probability of *both* signals from the *same* table — that's what the cross-domain claim actually wants to formalise. The current script bounds Riemann alone; the joint Bayesian is left as future work because the AEON validation is a self-consistency check (paper §4.2 caveats), not an independent prediction in the Bayesian sense.
+
+**Conclusion.** Bayes factor 5–50× under fair priors, with two unscored amplifiers (specificity + cross-domain). That's "suggestive, not overwhelming" — exactly where an honest pre-experimental claim should sit. Stronger lifting waits on bench-validation per [§5 of the AEON paper](./aeon_gravity_flyer_2026_05.md).
+
+## 7. Status
 
 - **2026-05-02** — first explicit publication of the cross-domain consistency claim. Both companion findings are dated the same day; this is the meta-result that ties them together.
-- **Pending:** a Bayesian formalisation. With a prior over plausible "constant tables" of five real numbers, what's the posterior probability that both findings hold simultaneously by chance? The question is well-posed but not answered here.
+- **2026-05-02 (added)** — Bayesian formalisation §6 above. Code: [`bayesian_cross_domain_2026_05.py`](./bayesian_cross_domain_2026_05.py).
 - **Pending:** physical apparatus per the AEON paper §5.2.
+- **Pending:** joint Bayesian incorporating the cross-domain prior — currently bounded only on the Riemann side.
 
 ## References
 

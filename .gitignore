@@ -1,0 +1,23 @@
+# Generated artifacts — pure noise, never commit
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python virtualenvs
+.venv/
+.env/
+venv/
+
+# Generated build output
+node_modules/
+dist/
+build/
